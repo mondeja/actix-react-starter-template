@@ -1,0 +1,51 @@
+#!/bin/sh
+
+: '
+  Script that runs the Softmond website.
+
+  Environment variables (default values):
+
+  - HOST (127.0.0.1): Host used to serve the website.
+  - PORT (8080): Port used to serve the website.
+  - RELEASE: Build code for production environment.
+'
+
+configure_script() {
+  set -e
+}
+
+configure_environment() {
+  # environment variables
+  if [ -z "$HOST" ]; then
+    HOST="127.0.0.1"
+  fi
+
+  if [ -z "$PORT" ]; then
+    PORT="8080"
+  fi
+}
+
+build() {
+  package_name="$(< Cargo.toml grep 'name = ' | cut -d'"' -f2)"
+  if [ -z "$RELEASE" ]; then
+    cargo build
+    target_dirname="debug"
+  else
+    cargo build --release
+    target_dirname="release"
+  fi
+  TARGET_BIN="./target/$target_dirname/$package_name"
+}
+
+run_app() {
+  HOST="$HOST" PORT="$PORT" "$TARGET_BIN"
+}
+
+main() {
+  configure_script
+  configure_environment
+  build
+  run_app
+}
+
+main
