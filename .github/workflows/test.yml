@@ -11,6 +11,12 @@ jobs:
   test-server:
     name: server
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test-args:
+          - RELEASE=
+          - RELEASE=1
+      fail-fast: false
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -24,5 +30,5 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
             target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - run: TESTS=server ./test
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ matrix.test-args }}
+      - run: TESTS=server ${{ matrix.test-args }} ./test
