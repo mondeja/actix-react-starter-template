@@ -67,7 +67,7 @@ test_client() {
   info "$msg"
 
   cd client
-  jest || TESTS_FAILED=1
+  node_modules/.bin/jest || TESTS_FAILED=1
   cd ..
 }
 
