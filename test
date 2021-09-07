@@ -6,10 +6,19 @@
   Environment variables (default values):
 
   - RELEASE: If not empty, build code for production environment.
+  - TESTS (server,client): If not empty, only test specified parts of the
+      application, separated by commas. Use "server" to test Rust ACTIX server
+      and "client" to test React UI client.
 '
 
 configure_script() {
   set -e
+
+  if [ -z "$TESTS" ]; then
+    TESTS="server,client"
+  fi
+
+  TESTS_FAILED=0
 }
 
 info() {
@@ -17,19 +26,23 @@ info() {
 }
 
 test_server() {
+  if ! printf "%s" "$TESTS" | grep -q "server"; then
+    return
+  fi
+
   msg="Running"
   if [ -z "$RELEASE" ]; then
     msg="$msg development"
   else
     msg="$msg production"
   fi
-  msg="$msg tests..."
+  msg="$msg server tests..."
   info "$msg"
 
   if [ -z "$RELEASE" ]; then
-    cargo test
+    cargo test || TESTS_FAILED=1
   else
-    cargo test --release
+    cargo test --release || TESTS_FAILED=1
   fi
 }
 
@@ -37,9 +50,16 @@ test_client() {
   :
 }
 
+clean_exit() {
+  if [ "$TESTS_FAILED" -eq 1 ]; then
+    exit 1
+  fi
+}
+
 main() {
   configure_script
   test_server
+  clean_exit
 }
 
 main

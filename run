@@ -8,6 +8,7 @@
   - HOST (127.0.0.1): Host used to serve the website.
   - PORT (8080): Port used to serve the website.
   - RELEASE: If not empty, build code for production environment.
+  - RUST_LOG (actix_web=info): Server logging level.
 '
 
 configure_script() {
@@ -20,6 +21,10 @@ configure_script() {
 
   if [ -z "$PORT" ]; then
     PORT="8080"
+  fi
+
+  if [ -z "$RUST_LOG" ]; then
+    RUST_LOG="actix_web=info"
   fi
 }
 
@@ -76,7 +81,7 @@ build() {
 }
 
 run_app() {
-  HOST="$HOST" PORT="$PORT" "$TARGET_BIN"
+  HOST="$HOST" PORT="$PORT" RUST_LOG="$RUST_LOG" "$TARGET_BIN"
 }
 
 main() {
