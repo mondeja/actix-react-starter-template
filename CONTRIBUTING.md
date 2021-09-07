@@ -19,6 +19,16 @@ the web server and UI client.
 ./run
 ```
 
+> See available options in the _./run_ script header.
+
+## Test application
+
+```sh
+./test
+```
+
+> See available options in the _./test_ script header.
+
 [posix]: https://en.wikipedia.org/wiki/POSIX
 [python]: https://www.python.org
 [node]: https://nodejs.org
