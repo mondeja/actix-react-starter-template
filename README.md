@@ -1,7 +1,7 @@
 # [ACTIX] (Rust) + [React] (Typescript) website template
 
-This template offers an ready-to-use Rust + Typescript web development
-environment with [ACTIX] and [React].
+This template offers an ready-to-use Rust + Typescript website starter template
+with [ACTIX] and [React].
 
 ## Understand it
 
