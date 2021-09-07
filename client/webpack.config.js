@@ -13,7 +13,7 @@ module.exports = {
   entry: path.resolve(__dirname, "src", "App.tsx"),
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "app.bundle.js",
+    filename: "app.js",
   },
   devtool: "source-map",
   resolve: {
@@ -42,7 +42,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: "ifdef-loader",
         options: {
-          __DEBUG__: !process.env.RELEASE,
+          DEBUG: !process.env.RELEASE,
         }
       }
     ],

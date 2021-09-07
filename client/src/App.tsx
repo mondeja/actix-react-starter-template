@@ -20,6 +20,6 @@ class App extends React.Component<AppComponentProps> {
 const rootElement = document.getElementById("root") as HTMLElement;
 ReactDOM.render(<App name={__NAME__} version={__VERSION__}/>, rootElement);
 
-// #if __DEBUG__
+/// #if DEBUG
 console.log(`${__NAME__} v${__VERSION__}`);
-// #endif
+/// #endif

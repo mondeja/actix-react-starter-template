@@ -7,7 +7,7 @@
 
   - HOST (127.0.0.1): Host used to serve the website.
   - PORT (8080): Port used to serve the website.
-  - RELEASE: Build code for production environment.
+  - RELEASE: If not empty, build code for production environment.
 '
 
 configure_script() {
