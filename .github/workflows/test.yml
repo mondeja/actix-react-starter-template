@@ -33,5 +33,5 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ matrix.test-args }}
       - name: Build client
         run: SOURCING=1 . run && ${{ matrix.test-args }} build_client
-      - name: Run tests
+      - name: Compile and run tests
         run: TESTS=server ${{ matrix.test-args }} ./test

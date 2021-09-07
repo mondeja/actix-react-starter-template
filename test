@@ -9,6 +9,8 @@
   - TESTS (server,client): If not empty, only test specified parts of the
       application, separated by commas. Use "server" to test Rust ACTIX server
       and "client" to test React UI client.
+  - SOURCING: If not empty, the main entry point of the script will not be
+      executed, so you can source it.
 '
 
 configure_script() {
@@ -62,4 +64,6 @@ main() {
   clean_exit
 }
 
-main
+if [ -z "$SOURCING" ]; then
+  main
+fi
