@@ -7,8 +7,10 @@
 
   - HOST (127.0.0.1): Host used to serve the website.
   - PORT (8080): Port used to serve the website.
-  - RELEASE: If not empty, build code for production environment.
   - RUST_LOG (actix_web=info): Server logging level.
+  - RELEASE: If not empty, build code for production environment.
+  - SOURCING: If not empty, the main entry point of the script will not be
+      executed, so you can source it.
 '
 
 configure_script() {
@@ -90,4 +92,6 @@ main() {
   run_app
 }
 
-main
+if [ -z "$SOURCING" ]; then
+  main
+fi

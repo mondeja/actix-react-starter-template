@@ -31,4 +31,7 @@ jobs:
             ~/.cargo/git
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ matrix.test-args }}
-      - run: TESTS=server ${{ matrix.test-args }} ./test
+      - name: Build client
+        run: SOURCING=1 . run && ${{ matrix.test-args }} build_client
+      - name: Run tests
+        run: TESTS=server ${{ matrix.test-args }} ./test
