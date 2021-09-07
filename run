@@ -25,8 +25,13 @@ configure_environment() {
   fi
 }
 
-build() {
-  package_name="$(< Cargo.toml grep 'name = ' | cut -d'"' -f2)"
+info() {
+  printf "[INFO] $1\n"
+}
+
+build_server() {
+  info "Building server..."
+  package_name="$(< Cargo.toml grep 'name = ' | head -n 1 | cut -d'"' -f2)"
   if [ -z "$RELEASE" ]; then
     cargo build
     target_dirname="debug"
@@ -35,6 +40,25 @@ build() {
     target_dirname="release"
   fi
   TARGET_BIN="./target/$target_dirname/$package_name"
+  printf "\n"
+}
+
+build_client() {
+  info "Building client..."
+  cd client
+  if [ ! -d "node_modules" ]; then
+    npm install
+  fi
+
+  RELEASE="$RELEASE" \
+    ./node_modules/.bin/webpack --config webpack.config.js
+  cd ..
+  printf "\n"
+}
+
+build() {
+  build_server
+  build_client
 }
 
 run_app() {
