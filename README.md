@@ -1,7 +1,6 @@
 # [ACTIX] ([Rust]) + [React] ([Typescript]) starter template
 
-This template offers an ready-to-use [Rust] + [Typescript] website starter
-template with [ACTIX] and [React].
+[Rust] + [Typescript] app starter template with [ACTIX] and [React].
 
 ## Basic architecture
 

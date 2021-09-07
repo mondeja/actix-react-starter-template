@@ -1,23 +1,36 @@
 {
   "name": "actix-react-starter-template",
   "version": "0.1.0",
-  "author": "Álvaro Mondéjar",
+  "author": "Álvaro Mondéjar <mondejar1994@gmail.com>",
+  "description": "",
   "license": "BSD-3-Clause",
+  "dependencies": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
   "devDependencies": {
     "@babel/core": "7.15.5",
     "@babel/preset-env": "7.15.4",
     "@babel/preset-react": "7.14.5",
     "@babel/preset-typescript": "7.15.0",
+    "@types/jest": "27.0.1",
     "@types/react": "17.0.20",
+    "babel-jest": "27.1.0",
     "babel-loader": "8.2.2",
     "fork-ts-checker-webpack-plugin": "6.3.3",
     "html-webpack-plugin": "5.3.2",
     "ifdef-loader": "2.3.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "jest": "27.1.0",
+    "react-test-renderer": "17.0.2",
+    "ts-jest": "27.0.5",
     "ts-loader": "9.2.5",
     "typescript": "4.4.2",
     "webpack": "5.52.0",
     "webpack-cli": "4.8.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:update": "jest --updateSnapshot"
   }
 }

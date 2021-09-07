@@ -10,7 +10,7 @@ const packageJson = require("./package.json");
 
 module.exports = {
   mode: process.env.RELEASE ? "production" : "development",
-  entry: path.resolve(__dirname, "src", "App.tsx"),
+  entry: path.resolve(__dirname, "src", "main.tsx"),
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "app.js",
