@@ -9,7 +9,6 @@ module.exports = {
   },
 
   // Test spec file resolution pattern
-  // Filename should contain `test` or `spec`
   testRegex: "test.tsx?$",
 
   // Module file extensions for importing
