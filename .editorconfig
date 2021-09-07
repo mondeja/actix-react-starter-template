@@ -10,5 +10,5 @@ trim_trailing_whitespace = true
 [*.{py,rs,cfg}]
 indent_size = 4
 
-[*.{py,rs,md}]
+[*.{py,rs,md,tsx}]
 trim_trailing_whitespace = false
