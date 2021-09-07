@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 : '
-  Script that runs the Softmond website.
+  Script that runs the application.
 
   Environment variables (default values):
 
@@ -12,9 +12,7 @@
 
 configure_script() {
   set -e
-}
 
-configure_environment() {
   # environment variables
   if [ -z "$HOST" ]; then
     HOST="127.0.0.1"
@@ -83,7 +81,6 @@ run_app() {
 
 main() {
   configure_script
-  configure_environment
   build
   run_app
 }

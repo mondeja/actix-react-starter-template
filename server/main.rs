@@ -1,6 +1,6 @@
 use actix_files::{Files, NamedFile};
 use actix_web::dev::{ServiceRequest, ServiceResponse};
-use actix_web::{get, App, HttpRequest, HttpServer, Responder};
+use actix_web::{get, middleware, App, HttpRequest, HttpServer, Responder};
 
 // Default configuration values
 static DEFAULT_HOST: &str = "127.0.0.1";
@@ -15,7 +15,7 @@ async fn hello(req: HttpRequest) -> impl Responder {
 
 /// Serve static files.
 /// See https://docs.rs/actix-files/0.5.0/actix_files/struct.Files.html#impl
-fn static_files() -> Files {
+fn index() -> Files {
     Files::new("/", "./client/build")
         .index_file("index.html")
         .default_handler(|req: ServiceRequest| {
@@ -31,6 +31,10 @@ fn static_files() -> Files {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    // configure logger
+    std::env::set_var("RUST_LOG", "actix_web=info");
+    env_logger::init();
+
     // configure port from environment variable
     let port: u16 = match std::env::var("PORT") {
         Ok(val) => val.parse::<u16>().unwrap_or(DEFAULT_PORT),
@@ -45,8 +49,71 @@ async fn main() -> std::io::Result<()> {
 
     // start HTTP server
     println!("[INFO] Serving on http://{}:{}", host, port);
-    HttpServer::new(|| App::new().service(hello).service(static_files()))
-        .bind((host, port))?
-        .run()
-        .await
+    HttpServer::new(|| {
+        App::new()
+            .wrap(middleware::Logger::default())
+            .service(hello)
+            .service(index())
+    })
+    .bind((host, port))?
+    .run()
+    .await
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    use actix_web::dev::Service;
+    use actix_web::web::Bytes;
+    use actix_web::{http, test, App, Error};
+
+    #[actix_rt::test]
+    async fn test_hello() -> Result<(), Error> {
+        let app = App::new().service(hello);
+        let mut app = test::init_service(app).await;
+
+        // assert response status
+        let req = test::TestRequest::get().uri("/hello/world").to_request();
+        let resp = app.call(req).await.unwrap();
+        assert_eq!(resp.status(), http::StatusCode::OK);
+
+        // assert response contents
+        let req = test::TestRequest::get().uri("/hello/world").to_request();
+        let result = test::read_response(&mut app, req).await;
+        assert_eq!(result, Bytes::from_static(b"Hello world!"));
+
+        let req = test::TestRequest::get().uri("/hello/mondeja").to_request();
+        let result = test::read_response(&mut app, req).await;
+        assert_eq!(result, Bytes::from_static(b"Hello mondeja!"));
+
+        Ok(())
+
+        // -----------------------------------------
+        // Other way to test this:
+        //let mut resp = app.call(req).await.unwrap();
+        //assert_eq!(resp.status(), http::StatusCode::OK);
+
+        // assert body content
+        //let body = resp.take_body();
+        //let body = body.as_ref().unwrap();
+        //assert_eq!(
+        //    &Body::from(b"Hello world!".as_ref()), // or serde.....
+        //    body
+        //);
+        // -----------------------------------------
+    }
+
+    #[actix_rt::test]
+    async fn test_index() -> Result<(), Error> {
+        let app = App::new().service(index());
+        let mut app = test::init_service(app).await;
+
+        // assert response status
+        let req = test::TestRequest::get().uri("/index.html").to_request();
+        let resp = app.call(req).await.unwrap();
+        assert_eq!(resp.status(), http::StatusCode::OK);
+
+        Ok(())
+    }
 }

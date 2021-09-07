@@ -1,0 +1,45 @@
+#!/usr/bin/env sh
+
+: '
+  Script that test the application.
+
+  Environment variables (default values):
+
+  - RELEASE: If not empty, build code for production environment.
+'
+
+configure_script() {
+  set -e
+}
+
+info() {
+  printf "[INFO] %s\n" "$1"
+}
+
+test_server() {
+  msg="Running"
+  if [ -z "$RELEASE" ]; then
+    msg="$msg development"
+  else
+    msg="$msg production"
+  fi
+  msg="$msg tests..."
+  info "$msg"
+
+  if [ -z "$RELEASE" ]; then
+    cargo test
+  else
+    cargo test --release
+  fi
+}
+
+test_client() {
+  :
+}
+
+main() {
+  configure_script
+  test_server
+}
+
+main
