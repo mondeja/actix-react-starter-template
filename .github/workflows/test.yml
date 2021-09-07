@@ -24,7 +24,8 @@ jobs:
         with:
           profile: minimal
           toolchain: stable
-      - uses: actions/cache@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
         with:
           path: |
             ~/.cargo/registry
@@ -46,5 +47,10 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/client/package-lock.json') }}-${{ matrix.test-args }}
       - name: Compile and run tests
         run: TESTS=client ${{ matrix.test-args }} ./test
