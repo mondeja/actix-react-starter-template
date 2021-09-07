@@ -5,6 +5,7 @@ use actix_web::{get, middleware, App, HttpRequest, HttpServer, Responder};
 // Default configuration values
 static DEFAULT_HOST: &str = "127.0.0.1";
 const DEFAULT_PORT: u16 = 8888;
+static DEFAULT_RUST_LOG: &str = "actix_web=info";
 
 /// Greet saying Hello {name}! Useful for basic debugging
 #[get("/hello/{name}")]
@@ -32,7 +33,11 @@ fn index() -> Files {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     // configure logger
-    std::env::set_var("RUST_LOG", "actix_web=info");
+    let rust_log = match std::env::var("RUST_LOG") {
+        Ok(val) => val,
+        Err(_e) => DEFAULT_RUST_LOG.to_string(),
+    };
+    std::env::set_var("RUST_LOG", rust_log);
     env_logger::init();
 
     // configure port from environment variable
