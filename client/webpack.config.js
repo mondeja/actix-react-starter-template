@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const path = require("path");
 
@@ -17,25 +17,23 @@ module.exports = {
   },
   devtool: "source-map",
   resolve: {
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: [".ts", ".tsx", ".js"],
   },
   module: {
     rules: [
       {
         test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
-        use: [
-          {loader: "babel-loader"},
-        ],
+        use: [{ loader: "babel-loader" }],
       },
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        loader: "ts-loader",
         exclude: /node_modules/,
         options: {
           // disable type checker - we will use it in fork plugin
-          transpileOnly: true
-        }
+          transpileOnly: true,
+        },
       },
       {
         test: /\.(t|j)sx?$/,
@@ -43,8 +41,8 @@ module.exports = {
         loader: "ifdef-loader",
         options: {
           DEBUG: !process.env.RELEASE,
-        }
-      }
+        },
+      },
     ],
   },
   plugins: [

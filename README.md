@@ -5,15 +5,15 @@ template with [ACTIX] and [React].
 
 ## Basic architecture
 
-- The backend code is located at *./server* and the frontend at *./client*.
-- There is a [POSIX] shell wrapper script to build and run at *./run*, so easy!
+- The backend code is located at _./server_ and the frontend at _./client_.
+- There is a [POSIX] shell wrapper script to build and run at _./run_, so easy!
 - Includes a [pre-commit] configuration for CI checks.
 
-> See *CONTRIBUTING.md* for how to setup and develop.
+> See _CONTRIBUTING.md_ for how to setup and develop.
 
-[ACTIX]: https://actix.rs
-[Rust]: https://www.rust-lang.org/
-[React]: https://reactjs.org
-[Typescript]: https://www.typescriptlang.org/
-[POSIX]: https://en.wikipedia.org/wiki/POSIX
+[actix]: https://actix.rs
+[rust]: https://www.rust-lang.org/
+[react]: https://reactjs.org
+[typescript]: https://www.typescriptlang.org/
+[posix]: https://en.wikipedia.org/wiki/POSIX
 [pre-commit]: https://pre-commit.com
