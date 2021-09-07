@@ -1,7 +1,7 @@
-# [ACTIX] (Rust) + [React] (Typescript) website template
+# [ACTIX] ([Rust]) + [React] ([Typescript]) website template
 
-This template offers an ready-to-use Rust + Typescript website starter template
-with [ACTIX] and [React].
+This template offers an ready-to-use [Rust] + [Typescript] website starter
+template with [ACTIX] and [React].
 
 ## Basic architecture
 
@@ -12,6 +12,8 @@ with [ACTIX] and [React].
 > See *CONTRIBUTING.md* for how to setup and develop.
 
 [ACTIX]: https://actix.rs
+[Rust]: https://www.rust-lang.org/
 [React]: https://reactjs.org
+[Typescript]: https://www.typescriptlang.org/
 [POSIX]: https://en.wikipedia.org/wiki/POSIX
 [pre-commit]: https://pre-commit.com
