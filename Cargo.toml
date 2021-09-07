@@ -1,5 +1,5 @@
 [package]
-name = "website-template"
+name = "actix-react-starter-template"
 version = "0.1.0"
 authors = ["Álvaro Mondéjar <mondejar1994@gmail.com>"]
 edition = "2018"
@@ -12,5 +12,5 @@ actix-files = "0.5.0"
 
 [[bin]]
 # override default src/main.rs entry point
-name = "website-template"
+name = "actix-react-starter-template"
 path = "server/main.rs"

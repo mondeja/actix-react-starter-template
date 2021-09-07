@@ -115,6 +115,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "actix-react-starter-template"
+version = "0.1.0"
+dependencies = [
+ "actix-files",
+ "actix-web",
+]
+
+[[package]]
 name = "actix-router"
 version = "0.2.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1809,14 +1817,6 @@ name = "wasm-bindgen-shared"
 version = "0.2.76"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "acdb075a845574a1fa5f09fd77e43f7747599301ea3417a9fbffdeedfc1f4a29"
-
-[[package]]
-name = "website-template"
-version = "0.1.0"
-dependencies = [
- "actix-files",
- "actix-web",
-]
 
 [[package]]
 name = "widestring"

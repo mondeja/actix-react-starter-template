@@ -26,12 +26,20 @@ configure_environment() {
 }
 
 info() {
-  printf "[INFO] $1\n"
+  printf "[INFO] %s\n" "$1"
 }
 
 build_server() {
-  info "Building server..."
+  msg="Building"
   package_name="$(< Cargo.toml grep 'name = ' | head -n 1 | cut -d'"' -f2)"
+  if [ -z "$RELEASE" ]; then
+    msg="$msg development"
+  else
+    msg="$msg production"
+  fi
+  msg="$msg server..."
+  info "$msg"
+
   if [ -z "$RELEASE" ]; then
     cargo build
     target_dirname="debug"
@@ -44,7 +52,15 @@ build_server() {
 }
 
 build_client() {
-  info "Building client..."
+  msg="Building"
+  if [ -z "$RELEASE" ]; then
+    msg="$msg development"
+  else
+    msg="$msg production"
+  fi
+  msg="$msg client..."
+  info "$msg"
+
   cd client
   if [ ! -d "node_modules" ]; then
     npm install

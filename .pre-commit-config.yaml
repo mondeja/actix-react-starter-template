@@ -6,3 +6,8 @@ repos:
         name: rustfmt
         args:
           - --autofix
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 2.1.5
+    hooks:
+      - id: shellcheck
+        name: shellcheck
