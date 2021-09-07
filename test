@@ -49,7 +49,26 @@ test_server() {
 }
 
 test_client() {
-  :
+  if ! printf "%s" "$TESTS" | grep -q "client"; then
+    return
+  fi
+
+  # build client
+  SOURCING=1 . ./run
+  RELEASE="$RELEASE" build_client
+
+  msg="Running"
+  if [ -z "$RELEASE" ]; then
+    msg="$msg development"
+  else
+    msg="$msg production"
+  fi
+  msg="$msg client tests..."
+  info "$msg"
+
+  cd client
+  jest || TESTS_FAILED=1
+  cd ..
 }
 
 clean_exit() {
@@ -61,6 +80,7 @@ clean_exit() {
 main() {
   configure_script
   test_server
+  test_client
   clean_exit
 }
 

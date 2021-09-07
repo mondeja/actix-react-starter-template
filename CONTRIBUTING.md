@@ -12,12 +12,13 @@ You need a [POSIX] shell under Linux/MacOS with [Python] and [Node] installed.
 
 ## Run application
 
-Run the application and go to <http://localhost:8080>. This step will build
-the web server and UI client.
+Run the application and go to <http://localhost:8080>.
 
 ```sh
 ./run
 ```
+
+This step will build the web server and UI client.
 
 > See available options in the _./run_ script header.
 
