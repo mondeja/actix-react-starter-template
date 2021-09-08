@@ -79,7 +79,7 @@ build_client() {
       msg="Building"
     fi
 
-    rm -rf node_modules
+    rm -rf node_modules build
   else
     msg="Building"
   fi

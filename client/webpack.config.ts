@@ -14,8 +14,9 @@ const config: Configuration = {
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "app.js",
+    publicPath: "",
   },
-  devtool: "source-map",
+  devtool: process.env.RELEASE ? "source-map" : "eval-source-map",
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
@@ -27,12 +28,17 @@ const config: Configuration = {
         use: [{ loader: "babel-loader" }],
       },
       {
-        test: /\.tsx?$/,
-        loader: "ts-loader",
+        test: /\.(ts|js)x?$/i,
         exclude: /node_modules/,
-        options: {
-          // disable type checker - we will use it in fork plugin
-          transpileOnly: true,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
+          },
         },
       },
       {
@@ -59,7 +65,9 @@ const config: Configuration = {
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
     }),
-    new ForkTsCheckerWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      async: false,
+    }),
     new DefinePlugin({
       __VERSION__: JSON.stringify(packageJson.version),
       __NAME__: JSON.stringify(packageJson.name),
