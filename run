@@ -71,8 +71,7 @@ build_client() {
     npm install
   fi
 
-  RELEASE="$RELEASE" \
-    ./node_modules/.bin/webpack --config webpack.config.js
+  RELEASE="$RELEASE" ./node_modules/.bin/webpack
   cd ..
   printf "\n"
 }

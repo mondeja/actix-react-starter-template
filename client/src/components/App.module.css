@@ -1,0 +1,8 @@
+.royal-blue {
+  color: #244074;
+}
+
+.app {
+  font-size: 20px;
+  composes: royal-blue;
+}

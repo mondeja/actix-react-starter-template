@@ -20,7 +20,15 @@ Run the application and go to <http://localhost:8080>.
 
 This step will build the web server and UI client.
 
-> See available options in the _./run_ script header.
+As this script is composed by independent functions, you can use it to build
+parts of the application standalone. For example, if you want to build the
+client just use:
+
+```sh
+SOURCING=1 source ./run && build_client
+```
+
+See all available options in the _./run_ script header.
 
 ## Test application
 
@@ -28,7 +36,7 @@ This step will build the web server and UI client.
 ./test
 ```
 
-> See available options in the _./test_ script header.
+See all available options in the _./test_ script header.
 
 [posix]: https://en.wikipedia.org/wiki/POSIX
 [python]: https://www.python.org
