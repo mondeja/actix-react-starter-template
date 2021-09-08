@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   roots: ["<rootDir>"],
   testEnvironment: "jsdom",
   moduleFileExtensions: ["ts", "tsx", "js", "json", "jsx"],

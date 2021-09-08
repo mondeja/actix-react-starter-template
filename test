@@ -16,6 +16,8 @@
       executed, so you can source it.
 '
 
+_DEV_CLIENT_RECREATED=0
+
 configure_script() {
   set -e
 
@@ -48,6 +50,14 @@ test_server() {
   msg="$msg server tests..."
   info "$msg"
 
+  if [ ! -d "client/build" ]; then
+    SOURCING=1 . ./run
+    RECREATE="$RECREATE" RELEASE="$RELEASE" build_client
+
+    # client is recreated, don't build it again on server tests
+    _DEV_CLIENT_RECREATED=1
+  fi
+
   if [ -z "$RELEASE" ]; then
     cargo test || TESTS_FAILED=1
   else
@@ -61,8 +71,10 @@ test_client() {
   fi
 
   # build client
-  SOURCING=1 . ./run
-  RECREATE="$RECREATE" RELEASE="$RELEASE" build_client
+  if [ "$_DEV_CLIENT_RECREATED" -eq 0 ]; then
+    SOURCING=1 . ./run
+    RECREATE="$RECREATE" RELEASE="$RELEASE" build_client
+  fi
 
   msg="Running"
   if [ -z "$RELEASE" ]; then
