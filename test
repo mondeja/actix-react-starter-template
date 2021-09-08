@@ -9,6 +9,9 @@
   - TESTS (server,client): If not empty, only test specified parts of the
       application, separated by commas. Use "server" to test Rust ACTIX server
       and "client" to test React UI client.
+  - RECREATE: If not empty, recreate from scratch the specified environment
+      compilations. Accept a comma separated string, being "server" and
+      "client" the possible values.
   - SOURCING: If not empty, the main entry point of the script will not be
       executed, so you can source it.
 '
@@ -30,6 +33,10 @@ info() {
 test_server() {
   if ! printf "%s" "$TESTS" | grep -q "server"; then
     return
+  fi
+
+  if printf "%s" "$RECREATE" | grep -q "server"; then
+    rm -rf target
   fi
 
   msg="Running"
@@ -55,7 +62,7 @@ test_client() {
 
   # build client
   SOURCING=1 . ./run
-  RELEASE="$RELEASE" build_client
+  RECREATE="$RECREATE" RELEASE="$RELEASE" build_client
 
   msg="Running"
   if [ -z "$RELEASE" ]; then
