@@ -1,6 +1,6 @@
 import path from "path";
 
-import { DefinePlugin } from "webpack";
+import { DefinePlugin, Configuration } from "webpack";
 import ESLintPlugin from "eslint-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
@@ -8,7 +8,7 @@ import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 import packageJson from "./package.json";
 
-const config = {
+const config: Configuration = {
   mode: process.env.RELEASE ? "production" : "development",
   entry: path.resolve(__dirname, "src", "main.tsx"),
   output: {
