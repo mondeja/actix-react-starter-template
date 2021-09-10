@@ -9,6 +9,8 @@
   - PORT (8080): Port used to serve the website.
   - RUST_LOG (actix_web=info): Server logging level.
   - RELEASE: If not empty, build code for production environment.
+  - WATCH: If not empty, watch for client and server file changes. You can not
+      use in combination with RELEASE.
   - RECREATE: If not empty, recreate from scratch the specified environment
       compilations. Accept a comma separated string, being "server" and
       "client" the possible values.
@@ -30,6 +32,12 @@ configure_script() {
 
   if [ -z "$RUST_LOG" ]; then
     RUST_LOG="actix_web=info"
+  fi
+
+  # on production, don't watch!
+  if [ -n "$RELEASE" ] && [ -n "$WATCH" ]; then
+    printf "[ERROR] Don't use WATCH environment variable along with RELEASE!" >&2
+    exit 1
   fi
 }
 
@@ -96,7 +104,12 @@ build_client() {
     npm install
   fi
 
-  RELEASE="$RELEASE" ./node_modules/.bin/webpack
+  if [ -z "$WATCH" ]; then
+    RELEASE="$RELEASE" ./node_modules/.bin/webpack
+  else
+    # run in background (will be stopped with Ctrl+C)
+    RELEASE="$RELEASE" WATCH="$WATCH" ./node_modules/.bin/webpack &
+  fi
   cd ..
   printf "\n"
 }
@@ -107,7 +120,11 @@ build() {
 }
 
 run_app() {
-  HOST="$HOST" PORT="$PORT" RUST_LOG="$RUST_LOG" "$TARGET_BIN"
+  if [ -n "$WATCH" ]; then
+    HOST="$HOST" PORT="$PORT" RUST_LOG="$RUST_LOG" cargo watch -- "$TARGET_BIN"
+  else
+    HOST="$HOST" PORT="$PORT" RUST_LOG="$RUST_LOG" "$TARGET_BIN"
+  fi
 }
 
 main() {

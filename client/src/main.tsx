@@ -10,5 +10,5 @@ const rootElement = document.getElementById("root") as HTMLElement;
 ReactDOM.render(<App name={__NAME__} version={__VERSION__} />, rootElement);
 
 /// #if DEBUG
-console.log(`${__NAME__} v${__VERSION__}`);
+console.log(`${__NAME__} v${__VERSION__} hola`);
 /// #endif

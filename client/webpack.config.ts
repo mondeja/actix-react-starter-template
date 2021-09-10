@@ -17,6 +17,7 @@ const config: Configuration = {
     publicPath: "",
   },
   devtool: process.env.RELEASE ? "source-map" : "eval-source-map",
+  watch: process.env.WATCH ? true : false,
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
