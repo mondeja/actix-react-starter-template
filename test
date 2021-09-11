@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 : '
-  Script that tests the application.
+  App test script.
 
   Environment variables (default values):
 
