@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+import "reset-css";
+
 import App from "./components/App";
 
 declare const __NAME__: string;

@@ -6,7 +6,8 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "reset-css": "5.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.15.5",
@@ -14,6 +15,7 @@
     "@babel/preset-react": "7.14.5",
     "@babel/preset-typescript": "7.15.0",
     "@babel/register": "7.15.3",
+    "@types/css-minimizer-webpack-plugin": "3.0.2",
     "@types/jest": "27.0.1",
     "@types/mini-css-extract-plugin": "2.2.0",
     "@types/react": "17.0.20",
@@ -25,6 +27,7 @@
     "babel-jest": "27.1.0",
     "babel-loader": "8.2.2",
     "css-loader": "6.2.0",
+    "css-minimizer-webpack-plugin": "3.0.2",
     "eslint": "7.32.0",
     "eslint-plugin-react": "7.25.1",
     "eslint-plugin-react-hooks": "4.2.0",

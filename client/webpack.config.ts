@@ -1,6 +1,7 @@
 import path from "path";
 
 import { DefinePlugin, Configuration } from "webpack";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
@@ -77,6 +78,9 @@ const config: Configuration = {
       extensions: ["js", "jsx", "ts", "tsx"],
     }),
   ],
+  optimization: {
+    minimizer: [new CssMinimizerPlugin()],
+  },
 };
 
 export default config;
