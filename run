@@ -42,7 +42,7 @@ configure_script() {
 }
 
 info() {
-  printf "[INFO] %s\n" "$1"
+  printf "%s\n" "$1"
 }
 
 build_server() {
@@ -127,6 +127,7 @@ build() {
 }
 
 run_app() {
+  info "Serving on http://$HOST:$PORT"
   if [ -n "$WATCH" ]; then
     HOST="$HOST" PORT="$PORT" RUST_LOG="$RUST_LOG" cargo watch -- "$TARGET_BIN"
   else

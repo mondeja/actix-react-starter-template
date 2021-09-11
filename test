@@ -29,7 +29,7 @@ configure_script() {
 }
 
 info() {
-  printf "[INFO] %s\n" "$1"
+  printf "%s\n" "$1"
 }
 
 test_server() {
@@ -51,7 +51,7 @@ test_server() {
   info "$msg"
 
   if [ ! -d "client/build" ]; then
-    SOURCING=1 . ./run
+    SOURCING=1 . run
     RECREATE="$RECREATE" RELEASE="$RELEASE" build_client
 
     # client is recreated, don't build it again on server tests

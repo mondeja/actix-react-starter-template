@@ -53,7 +53,6 @@ async fn main() -> std::io::Result<()> {
     };
 
     // start HTTP server
-    println!("[INFO] Serving on http://{}:{}", host, port);
     HttpServer::new(|| {
         App::new()
             .wrap(middleware::Logger::default())
