@@ -52,7 +52,11 @@ build_server() {
     else
       msg="Building"
     fi
-    rm -rf target
+    if [ -z "$RELEASE" ]; then
+      rm -rf target/debug
+    else
+      rm -rf target/release
+    fi
   else
     msg="Building"
   fi

@@ -3,9 +3,10 @@ import path from "path";
 import { DefinePlugin, Configuration } from "webpack";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import TerserPlugin from "terser-webpack-plugin";
 
 import packageJson from "./package.json";
 
@@ -14,7 +15,7 @@ const config: Configuration = {
   entry: path.resolve(__dirname, "src", "main.tsx"),
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "app.js",
+    filename: "[name].[contenthash].js",
     publicPath: "",
   },
   devtool: process.env.RELEASE ? "source-map" : "eval-source-map",
@@ -79,7 +80,12 @@ const config: Configuration = {
     }),
   ],
   optimization: {
-    minimizer: [new CssMinimizerPlugin()],
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserPlugin({
+        parallel: true,
+      }),
+    ],
   },
 };
 
