@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 : '
-  Script that runs the application.
+  App run script.
 
   Environment variables (default values):
 
@@ -111,11 +111,11 @@ build_client() {
     npm install
   fi
 
-  if [ -z "$WATCH" ]; then
-    RELEASE="$RELEASE" ./node_modules/.bin/webpack
-  else
+  if [ -n "$WATCH" ]; then
     # run in background (will be stopped with Ctrl+C)
     RELEASE="$RELEASE" WATCH="$WATCH" ./node_modules/.bin/webpack &
+  else
+    RELEASE="$RELEASE" ./node_modules/.bin/webpack
   fi
   cd ..
   printf "\n"

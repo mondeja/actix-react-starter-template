@@ -4,7 +4,7 @@ import renderer from "react-test-renderer";
 
 import App from "./App";
 
-test("renders hello world paragraph", () => {
+test("render hello world paragraph", () => {
   const componentA = renderer.create(<App name="foo" version="1.2.0" />);
   const treeA = componentA.toJSON();
   expect(treeA).toMatchInlineSnapshot(`

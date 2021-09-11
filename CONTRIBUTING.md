@@ -25,7 +25,7 @@ parts of the application standalone. For example, if you want to build the
 client just use:
 
 ```sh
-$ SOURCING=1 source ./run && build_client
+$ SOURCING=1 . run && build_client
 ```
 
 See all available options in the _./run_ script header.
@@ -60,8 +60,8 @@ following next commands:
    $ cd <project>
    $ git remote get-url --all origin
    https://github.com/<username>/<project-name>.git
-   $ LC_ALL=C git remote get-url --all upstream
-   fatal: No such remote 'upstream'
+   $ LC_ALL=C git remote get-url --all template
+   fatal: No such remote 'template'
    $ git remote add template https://github.com/mondeja/actix-react-starter-template.git
    $ git remote get-url --all template
    https://github.com/mondeja/actix-react-starter-template.git
