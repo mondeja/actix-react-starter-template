@@ -97,8 +97,11 @@ build_client() {
   else
     msg="$msg production"
   fi
-  msg="$msg client..."
-  info "$msg"
+  msg="$msg client"
+  if [ -n "$WATCH" ]; then
+    msg="$msg on background"
+  fi
+  info "$msg..."
 
   if [ ! -d "node_modules" ]; then
     npm install
