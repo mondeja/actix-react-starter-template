@@ -11,6 +11,8 @@
   - RELEASE: If not empty, build code for production environment.
   - WATCH: If not empty, watch for client and server file changes. You can not
       use in combination with RELEASE.
+  - SHOW: If not empty, once the app started running, open the HOST:PORT url
+      in the browser using xdg-open.
   - RECREATE: If not empty, recreate from scratch the specified environment
       compilations. Accept a comma separated string, being "server" and
       "client" the possible values.
@@ -128,6 +130,15 @@ build() {
 
 run_app() {
   info "Serving on http://$HOST:$PORT"
+  if [ -n "$SHOW" ]; then
+    if [ "$HOST" = "localhost" ] || [ "$(echo "$HOST" | cut -d'.' -f1)" = "127" ]; then
+      prefix="http://"
+    else
+      prefix=""
+    fi
+    xdg-open "$prefix$HOST:$PORT" >/dev/null 2>&1
+  fi
+
   if [ -n "$WATCH" ]; then
     HOST="$HOST" PORT="$PORT" RUST_LOG="$RUST_LOG" cargo watch -- "$TARGET_BIN"
   else

@@ -26,11 +26,6 @@ const config: Configuration = {
   module: {
     rules: [
       {
-        test: /\.(t|j)sx?$/i,
-        exclude: /node_modules/,
-        use: [{ loader: "babel-loader" }],
-      },
-      {
         test: /\.(ts|js)x?$/i,
         exclude: /node_modules/,
         use: {
@@ -72,8 +67,8 @@ const config: Configuration = {
       async: false,
     }),
     new DefinePlugin({
-      __VERSION__: JSON.stringify(packageJson.version),
       __NAME__: JSON.stringify(packageJson.name),
+      __VERSION__: JSON.stringify(packageJson.version),
     }),
     new ESLintPlugin({
       extensions: ["js", "jsx", "ts", "tsx"],
