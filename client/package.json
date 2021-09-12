@@ -1,9 +1,14 @@
 {
   "name": "actix-react-starter-template",
   "version": "0.1.0",
-  "author": "Álvaro Mondéjar <mondejar1994@gmail.com>",
-  "description": "",
+  "author": "Author Name <authoremail@provider.ext>",
+  "description": "actix-react-starter-template client",
   "license": "BSD-3-Clause",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:update": "jest --updateSnapshot"
+  },
   "dependencies": {
     "@fontsource/paytone-one": "4.5.0",
     "react": "17.0.2",
@@ -47,10 +52,5 @@
     "typescript": "4.4.2",
     "webpack": "5.52.0",
     "webpack-cli": "4.8.0"
-  },
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:update": "jest --updateSnapshot"
   }
 }

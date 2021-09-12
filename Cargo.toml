@@ -1,7 +1,7 @@
 [package]
 name = "actix-react-starter-template"
 version = "0.1.0"
-authors = ["Álvaro Mondéjar <mondejar1994@gmail.com>"]
+authors = ["Author Name <authoremail@provider.ext>"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
