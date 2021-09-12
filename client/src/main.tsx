@@ -5,7 +5,7 @@ import "reset-css";
 import "@fontsource/paytone-one";
 import "./global-styles.css";
 
-import App from "./components/App";
+import { App } from "./components";
 
 declare const __NAME__: string;
 declare const __VERSION__: string;
