@@ -2,6 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import "reset-css";
+import "@fontsource/paytone-one";
+import "./global-styles.css";
 
 import App from "./components/App";
 
