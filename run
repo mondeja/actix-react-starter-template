@@ -36,6 +36,10 @@ configure_script() {
     RUST_LOG="actix_web=info"
   fi
 
+  if [ "$RECREATE" = "1" ]; then
+    RECREATE="server,client"
+  fi
+
   # on production, don't watch!
   if [ -n "$RELEASE" ] && [ -n "$WATCH" ]; then
     printf "[ERROR] Don't use WATCH environment variable along with RELEASE!" >&2
@@ -136,7 +140,11 @@ run_app() {
     else
       prefix=""
     fi
-    xdg-open "$prefix$HOST:$PORT" >/dev/null 2>&1
+    if [ -n "$WATCH" ]; then
+      (sleep 0.7 && xdg-open "$prefix$HOST:$PORT" >/dev/null 2>&1)
+    else
+      xdg-open "$prefix$HOST:$PORT" >/dev/null 2>&1
+    fi
   fi
 
   if [ -n "$WATCH" ]; then
