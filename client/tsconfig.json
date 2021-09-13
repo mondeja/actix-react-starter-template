@@ -18,6 +18,11 @@
     "entryPoints": ["./src"],
     "entryPointStrategy": "Expand",
     "out": "docs",
-    "exclude": ["**/*+(index|.test|.e2e).(ts|tsx)", "src/custom.d.ts"]
+    "exclude": [
+      "**/*+(.test|.e2e).(ts|tsx)",
+      "**/index.ts",
+      "**/custom.d.ts",
+      "node_modules"
+    ]
   }
 }
