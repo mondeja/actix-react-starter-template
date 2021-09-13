@@ -11,13 +11,6 @@ repos:
     hooks:
       - id: shellcheck
         name: shellcheck
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
-    hooks:
-      - id: check-json
-        name: check-json
-      - id: check-toml
-        name: check-toml
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v2.3.2
     hooks:

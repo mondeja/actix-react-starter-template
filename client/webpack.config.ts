@@ -54,6 +54,10 @@ const config: Configuration = {
           "css-loader",
         ],
       },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
     ],
   },
   plugins: [
