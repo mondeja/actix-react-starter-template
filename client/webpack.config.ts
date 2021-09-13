@@ -5,11 +5,55 @@ import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import HtmlWebpackTagsPlugin from "html-webpack-tags-plugin";
+import LiveReloadPlugin from "webpack-livereload-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import StyleLintPlugin from "stylelint-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 
 import packageJson from "./package.json";
+
+const pluginsConfig = (): any[] => {
+  const plugins: any[] = [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "src", "public", "index.html"),
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      async: false,
+    }),
+    new DefinePlugin({
+      __NAME__: JSON.stringify(packageJson.name),
+      __VERSION__: JSON.stringify(packageJson.version),
+    }),
+    new ESLintPlugin({
+      extensions: ["js", "jsx", "ts", "tsx"],
+    }),
+    new StyleLintPlugin(),
+  ];
+
+  if (process.env.WATCH) {
+    const [protocol, hostname, port] = ["http", "127.0.0.1", 35729];
+
+    plugins.push(
+      new LiveReloadPlugin({
+        protocol: protocol,
+        hostname: hostname,
+        port: port,
+      })
+    );
+    plugins.push(
+      new HtmlWebpackTagsPlugin({
+        tags: [`${protocol}://${hostname}:${port}/livereload.js`],
+        append: true,
+      })
+    );
+  }
+
+  return plugins;
+};
 
 const config: Configuration = {
   mode: process.env.RELEASE ? "production" : "development",
@@ -61,25 +105,7 @@ const config: Configuration = {
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "src", "public", "index.html"),
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-    }),
-    new ForkTsCheckerWebpackPlugin({
-      async: false,
-    }),
-    new DefinePlugin({
-      __NAME__: JSON.stringify(packageJson.name),
-      __VERSION__: JSON.stringify(packageJson.version),
-    }),
-    new ESLintPlugin({
-      extensions: ["js", "jsx", "ts", "tsx"],
-    }),
-    new StyleLintPlugin(),
-  ],
+  plugins: pluginsConfig(),
   optimization: {
     minimizer: [
       new CssMinimizerPlugin(),
