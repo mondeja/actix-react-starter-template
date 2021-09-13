@@ -20,9 +20,9 @@
     "out": "docs",
     "exclude": [
       "**/*+(.test|.e2e).(ts|tsx)",
+      "(node_modules|docs)/",
       "**/index.ts",
-      "**/custom.d.ts",
-      "node_modules"
+      "**/custom.d.ts"
     ]
   }
 }

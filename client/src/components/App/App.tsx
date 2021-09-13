@@ -13,8 +13,7 @@ export interface AppProps {
 /**
  * Application main entry point component.
  *
- * @property {string} name - Application name.
- * @property {string} version - Application version.
+ * @property {@link AppProps} props - App component properties.
  */
 export class App extends React.Component<AppProps> {
   render(): JSX.Element {
