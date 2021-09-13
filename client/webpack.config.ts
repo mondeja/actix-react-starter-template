@@ -10,6 +10,7 @@ import LiveReloadPlugin from "webpack-livereload-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import StyleLintPlugin from "stylelint-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
+import WebpackObfuscator from "webpack-obfuscator";
 
 import packageJson from "./package.json";
 
@@ -48,6 +49,14 @@ const pluginsConfig = (): any[] => {
       new HtmlWebpackTagsPlugin({
         tags: [`${protocol}://${hostname}:${port}/livereload.js`],
         append: true,
+      })
+    );
+  }
+
+  if (process.env.RELEASE) {
+    plugins.push(
+      new WebpackObfuscator({
+        rotateStringArray: true,
       })
     );
   }
