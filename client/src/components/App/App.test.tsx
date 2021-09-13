@@ -2,7 +2,7 @@ import * as React from "react";
 
 import renderer from "react-test-renderer";
 
-import App from "./App";
+import { App } from "./App";
 
 test("render hello world paragraph", () => {
   const componentA = renderer.create(<App name="foo" version="1.2.0" />);

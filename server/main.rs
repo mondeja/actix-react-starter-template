@@ -14,10 +14,32 @@ async fn hello(req: HttpRequest) -> impl Responder {
     format!("Hello {}!", &name)
 }
 
-/// Serve static files.
+/// Serve client documentation.
+///
+/// The documentation is generated with a static documentation generator. Its static
+/// assets are placed at './client/docs/' directory and served under '/client/docs/' URL.
+fn client_docs() -> Files {
+    Files::new("/client/docs/", "./client/docs")
+        .index_file("index.html")
+        .default_handler(|req: ServiceRequest| {
+            let (http_req, _payload) = req.into_parts();
+
+            async {
+                let response =
+                    NamedFile::open("./client/docs/index.html")?.into_response(&http_req)?;
+                Ok(ServiceResponse::new(http_req, response))
+            }
+        })
+}
+
+/// Serve index.
+///
+/// This must be the latest mount path in the application because, setted at root ('/'),
+/// services registered after this one will be inaccessible.
+///
 /// See https://docs.rs/actix-files/0.5.0/actix_files/struct.Files.html#impl
 fn index() -> Files {
-    Files::new("/", "./client/build")
+    Files::new("/", "./client/build/")
         .index_file("index.html")
         .default_handler(|req: ServiceRequest| {
             let (http_req, _payload) = req.into_parts();
@@ -57,6 +79,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap(middleware::Logger::default())
             .service(hello)
+            .service(client_docs())
             .service(index())
     })
     .bind((host, port))?

@@ -13,5 +13,11 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "typedocOptions": {
+    "entryPoints": ["./src"],
+    "entryPointStrategy": "Expand",
+    "out": "docs",
+    "exclude": ["**/*+(index|.test|.e2e).(ts|tsx)", "src/custom.d.ts"]
+  }
 }

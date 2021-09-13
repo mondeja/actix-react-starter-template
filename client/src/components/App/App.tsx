@@ -2,12 +2,21 @@ import * as React from "react";
 
 import styles from "./App.module.css";
 
-interface AppComponentProps {
+export interface AppProps {
+  /** Application name */
   name: string;
+
+  /** Application version */
   version: string;
 }
 
-export default class App extends React.Component<AppComponentProps> {
+/**
+ * Application main entry point component.
+ *
+ * @property {string} name - Application name.
+ * @property {string} version - Application version.
+ */
+export class App extends React.Component<AppProps> {
   render(): JSX.Element {
     return (
       <p className={styles.app}>
