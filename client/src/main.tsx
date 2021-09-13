@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 
 import "reset-css";
 import "@fontsource/paytone-one";
-import "./global-styles.css";
+import "./global-styles.scss";
 
 import { App } from "./components";
 

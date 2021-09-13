@@ -102,10 +102,11 @@ const config: Configuration = {
         },
       },
       {
-        test: /\.css$/i,
+        test: /\.s?[ac]ss$/i,
         use: [
           process.env.RELEASE ? MiniCssExtractPlugin.loader : "style-loader",
           "css-loader",
+          "sass-loader",
         ],
       },
       {
