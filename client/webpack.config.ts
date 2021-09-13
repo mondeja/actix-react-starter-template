@@ -6,6 +6,7 @@ import ESLintPlugin from "eslint-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import StyleLintPlugin from "stylelint-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 
 import packageJson from "./package.json";
@@ -77,6 +78,7 @@ const config: Configuration = {
     new ESLintPlugin({
       extensions: ["js", "jsx", "ts", "tsx"],
     }),
+    new StyleLintPlugin(),
   ],
   optimization: {
     minimizer: [
