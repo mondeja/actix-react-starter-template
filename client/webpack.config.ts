@@ -75,12 +75,12 @@ const config: Configuration = {
   devtool: process.env.RELEASE ? "source-map" : "eval-source-map",
   watch: process.env.WATCH ? true : false,
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/i,
+        test: /\.[tj]sx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -94,7 +94,7 @@ const config: Configuration = {
         },
       },
       {
-        test: /\.(t|j)sx?$/,
+        test: /\.[tj]sx?$/,
         exclude: /node_modules/,
         loader: "ifdef-loader",
         options: {
@@ -102,7 +102,7 @@ const config: Configuration = {
         },
       },
       {
-        test: /\.s?[ac]ss$/i,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           process.env.RELEASE ? MiniCssExtractPlugin.loader : "style-loader",
           "css-loader",
@@ -110,7 +110,7 @@ const config: Configuration = {
         ],
       },
       {
-        test: /\.(png|jpg|jpeg|gif)$/i,
+        test: /\.(png|jpg|jpeg|gif)$/,
         type: "asset/resource",
       },
     ],
