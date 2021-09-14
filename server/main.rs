@@ -1,6 +1,5 @@
-use actix_files::{Files, NamedFile};
-use actix_web::dev::{ServiceRequest, ServiceResponse};
-use actix_web::{get, middleware, App, HttpRequest, HttpServer, Responder};
+use actix_files::Files;
+use actix_web::{get, middleware, web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 
 // Default configuration values
 static DEFAULT_HOST: &str = "127.0.0.1";
@@ -19,17 +18,7 @@ async fn hello(req: HttpRequest) -> impl Responder {
 /// The documentation is generated with a static documentation generator. Its static
 /// assets are placed at './client/docs/' directory and served under '/client/docs/' URL.
 fn client_docs() -> Files {
-    Files::new("/client/docs/", "./client/docs")
-        .index_file("index.html")
-        .default_handler(|req: ServiceRequest| {
-            let (http_req, _payload) = req.into_parts();
-
-            async {
-                let response =
-                    NamedFile::open("./client/docs/index.html")?.into_response(&http_req)?;
-                Ok(ServiceResponse::new(http_req, response))
-            }
-        })
+    Files::new("/client/docs/", "./client/docs").index_file("index.html")
 }
 
 /// Serve index.
@@ -39,17 +28,7 @@ fn client_docs() -> Files {
 ///
 /// See https://docs.rs/actix-files/0.5.0/actix_files/struct.Files.html#impl
 fn index() -> Files {
-    Files::new("/", "./client/build/")
-        .index_file("index.html")
-        .default_handler(|req: ServiceRequest| {
-            let (http_req, _payload) = req.into_parts();
-
-            async {
-                let response =
-                    NamedFile::open("./client/build/index.html")?.into_response(&http_req)?;
-                Ok(ServiceResponse::new(http_req, response))
-            }
-        })
+    Files::new("/", "./client/build/").index_file("index.html")
 }
 
 #[actix_web::main]
@@ -80,6 +59,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(middleware::Logger::default())
             .service(hello)
             .service(client_docs())
+            .default_service(web::route().to(HttpResponse::NotFound))
             .service(index())
     })
     .bind((host, port))?
