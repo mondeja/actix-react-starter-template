@@ -79,13 +79,10 @@ following next commands:
    ```
 
 **WARNING!** Keep in mind that the content of the files will be ovewritten,
-so try to write custom build process in separate files. [Open an issue] if
-you need to add certain hooks based on existence of files in the `template`
-repository.
+so try to write custom build process in separate files.
 
 [posix]: https://en.wikipedia.org/wiki/POSIX
 [python]: https://www.python.org
 [node]: https://nodejs.org
 [pre-commit]: https://pre-commit.com
 [rustup-install]: https://doc.rust-lang.org/book/ch01-01-installation.html
-[open an issue]: https://github.com/mondeja/actix-react-starter-template/issues/new
