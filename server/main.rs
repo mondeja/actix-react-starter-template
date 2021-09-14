@@ -1,4 +1,5 @@
 mod handlers;
+mod routes;
 
 use actix_web::{middleware, web, App, HttpResponse, HttpServer};
 
@@ -33,12 +34,13 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .wrap(middleware::Logger::default())
-            .service(handlers::hello)
-            .service(handlers::client_docs())
             .default_service(web::route().to(HttpResponse::NotFound))
-            .service(handlers::index())
+            .configure(routes::init)
     })
     .bind((host, port))?
     .run()
     .await
+    .ok();
+
+    Ok(())
 }
