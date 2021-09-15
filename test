@@ -11,7 +11,8 @@
       and "client" to test React UI client.
   - RECREATE: If not empty, recreate from scratch the specified environment
       compilations. Accept a comma separated string, being "server" and
-      "client" the possible values.
+      "client" the possible values. If the passed value is "1" it will be
+      overwritten with "server,client".
   - SOURCING: If not empty, the main entry point of the script will not be
       executed, so you can source it.
 '
@@ -23,6 +24,10 @@ configure_script() {
 
   if [ -z "$TESTS" ]; then
     TESTS="server,client"
+  fi
+
+  if [ "$RECREATE" = "1" ]; then
+    RECREATE="server,client"
   fi
 
   TESTS_FAILED=0
