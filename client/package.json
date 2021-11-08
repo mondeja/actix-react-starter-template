@@ -45,7 +45,7 @@
     "html-webpack-plugin": "5.3.2",
     "html-webpack-tags-plugin": "3.0.1",
     "identity-obj-proxy": "3.0.0",
-    "ifdef-loader": "2.3.0",
+    "ifdef-loader": "2.3.1",
     "javascript-obfuscator": "2.19.1",
     "jest": "27.1.0",
     "jest-watch-typeahead": "0.6.4",
