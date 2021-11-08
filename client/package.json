@@ -46,7 +46,7 @@
     "html-webpack-tags-plugin": "3.0.1",
     "identity-obj-proxy": "3.0.0",
     "ifdef-loader": "2.3.0",
-    "javascript-obfuscator": "2.19.0",
+    "javascript-obfuscator": "2.19.1",
     "jest": "27.1.0",
     "jest-watch-typeahead": "0.6.4",
     "mini-css-extract-plugin": "2.2.2",
