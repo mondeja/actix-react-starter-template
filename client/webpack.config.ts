@@ -56,7 +56,7 @@ const pluginsConfig = (): any[] => {
   if (process.env.RELEASE) {
     plugins.push(
       new WebpackObfuscator({
-        rotateStringArray: true,
+        stringArrayRotate: true,
       })
     );
   }
