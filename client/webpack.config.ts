@@ -43,13 +43,13 @@ const pluginsConfig = (): any[] => {
         protocol: protocol,
         hostname: hostname,
         port: port,
-      })
+      }),
     );
     plugins.push(
       new HtmlWebpackTagsPlugin({
         tags: [`${protocol}://${hostname}:${port}/livereload.js`],
         append: true,
-      })
+      }),
     );
   }
 
@@ -57,7 +57,7 @@ const pluginsConfig = (): any[] => {
     plugins.push(
       new WebpackObfuscator({
         stringArrayRotate: true,
-      })
+      }),
     );
   }
 
