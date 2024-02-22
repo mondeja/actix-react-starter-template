@@ -10,7 +10,7 @@
   - RUST_LOG (actix_web=info): Server logging level.
   - RELEASE: If not empty, build code for production environment.
   - WATCH: If not empty, watch for client and server file changes. You can not
-      use in combination with RELEASE.
+      use in combination with RELEASE. You need to install cargo-watch to use.
   - SHOW: If not empty, once the app started running, open the HOST:PORT url
       in the browser using xdg-open.
   - RECREATE: If not empty, recreate from scratch the specified environment

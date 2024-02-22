@@ -1,18 +1,17 @@
 repos:
-  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-    rev: v2.11.0
+  - repo: https://github.com/doublify/pre-commit-rust
+    rev: v1.0
     hooks:
-      - id: pretty-format-rust
-        name: rustfmt
-        args:
-          - --autofix
+      - id: fmt
+      - id: cargo-check
+      - id: clippy
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 3.0.0
     hooks:
       - id: shellcheck
         name: shellcheck
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.3
+    rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
         name: prettier
