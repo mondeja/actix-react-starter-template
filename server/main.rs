@@ -13,7 +13,7 @@ async fn main() -> std::io::Result<()> {
     // configure logger
     let rust_log = match std::env::var("RUST_LOG") {
         Ok(val) => val,
-        Err(_e) => DEFAULT_RUST_LOG.to_string(),
+        Err(_) => DEFAULT_RUST_LOG.to_string(),
     };
     std::env::set_var("RUST_LOG", rust_log);
     env_logger::init();
@@ -21,13 +21,13 @@ async fn main() -> std::io::Result<()> {
     // configure port from environment variable
     let port: u16 = match std::env::var("PORT") {
         Ok(val) => val.parse::<u16>().unwrap_or(DEFAULT_PORT),
-        Err(_e) => DEFAULT_PORT,
+        Err(_) => DEFAULT_PORT,
     };
 
     // configure host from environment variable
     let host = match std::env::var("HOST") {
         Ok(val) => val,
-        Err(_e) => DEFAULT_HOST.to_string(),
+        Err(_) => DEFAULT_HOST.to_string(),
     };
 
     // start HTTP server

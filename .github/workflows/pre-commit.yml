@@ -13,8 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - name: Run pre-commit
-        uses: pre-commit/action@v2.0.3
+          python-version: "3.12.1"
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pre-commit
+      - name: Lint
+        run: pre-commit run --all-files --show-diff-on-failure
