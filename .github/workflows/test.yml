@@ -18,19 +18,19 @@ jobs:
           - RELEASE=1
       fail-fast: false
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
-        name: Setup Rust
+      - uses: actions/checkout@v4
+      - name: Setup Rust
+        uses: hecrj/setup-rust-action@v2
         with:
+          rust-version: stable
           profile: minimal
-          toolchain: stable
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
       - name: Update NPM
         run: npm install npm@latest -g
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/registry
@@ -52,14 +52,14 @@ jobs:
           - RELEASE=1
       fail-fast: false
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
       - name: Update NPM
         run: npm install npm@latest -g
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/client/package-lock.json') }}-${{ matrix.test-args }}
